@@ -1,5 +1,5 @@
 {
-  "name": "crud-test-angular",
+  "name": "angular-person",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
