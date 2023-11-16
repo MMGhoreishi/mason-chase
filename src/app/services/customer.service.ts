@@ -38,16 +38,17 @@ export class CustomerService extends Init {
     localStorage.setItem('customers', JSON.stringify(customers));
   }
 
-  updateCustomer(customer: Customer, email: string) {
+  updateCustomer(customer: Customer, index: number) {
     const customers: Customer[] = JSON.parse(
       localStorage.getItem('customers') || ''
     );
+    customers[index] = customer;
 
-    for (let i = 0; i < customers.length; i++) {
-      if (customers[i].Email == email) {
-        customers[i] = customer;
-      }
-    }
+    // for (let i = 0; i < customers.length; i++) {
+    //   if (customers[i].Email == customer.Email) {
+    //     customers[i] = customer;
+    //   }
+    // }
     localStorage.setItem('customers', JSON.stringify(customers));
   }
 }

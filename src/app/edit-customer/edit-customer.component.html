@@ -1,0 +1,177 @@
+<form
+  #f="ngForm"
+  class="form"
+  (ngSubmit)="editCustomer()"
+  [formGroup]="customerForm"
+  novalidate
+>
+  <div class="form-group mb-2">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="Firstname"
+      placeholder="firstname"
+    />
+    <span
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['Firstname'].touched &&
+        customerForm.controls['Firstname'].errors?.required
+      "
+    >
+      Firstname is required
+    </span>
+  </div>
+
+  <div class="form-group mb-2">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="Lastname"
+      placeholder="Lastname"
+    />
+    <span
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['Lastname'].touched &&
+        customerForm.controls['Lastname'].errors?.required
+      "
+    >
+      Lastname is required
+    </span>
+  </div>
+
+  <div class="form-group mb-2">
+    <input
+      type="date"
+      class="form-control"
+      formControlName="DateOfBirth"
+      placeholder="DateOfBirth"
+    />
+    <span
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['DateOfBirth'].touched &&
+        customerForm.controls['DateOfBirth'].errors?.required
+      "
+    >
+      DateOfBirth is required
+    </span>
+  </div>
+
+  <div class="form-group mb-2">
+    <div class="wrapper">
+      <ngx-intl-tel-input
+        [cssClass]="'custom'"
+        [preferredCountries]="preferredCountries"
+        [enableAutoCountrySelect]="true"
+        [enablePlaceholder]="true"
+        [searchCountryFlag]="true"
+        [searchCountryField]="[
+          SearchCountryField.Iso2,
+          SearchCountryField.Name
+        ]"
+        [selectFirstCountry]="false"
+        [selectedCountryISO]="CountryISO.Iran"
+        [maxLength]="15"
+        [phoneValidation]="true"
+        [separateDialCode]="separateDialCode"
+        [numberFormat]="PhoneNumberFormat.National"
+        name="phone"
+        formControlName="PhoneNumber"
+      >
+      </ngx-intl-tel-input>
+    </div>
+
+    <div
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['PhoneNumber'].touched &&
+        !customerForm.controls['PhoneNumber'].errors?.required
+      "
+    >
+      <span>
+        {{
+          customerForm.controls["PhoneNumber"].invalid
+            ? "PhoneNumber is invalid"
+            : null
+        }}
+      </span>
+    </div>
+
+    <span
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['PhoneNumber'].touched &&
+        customerForm.controls['PhoneNumber'].errors?.required
+      "
+    >
+      PhoneNumber is required
+    </span>
+  </div>
+
+  <div class="form-group mb-2">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="Email"
+      placeholder="Email"
+    />
+    <span
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['Email'].touched &&
+        customerForm.controls['Email'].errors?.required
+      "
+    >
+      Email is required
+    </span>
+    <span
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['Email'].touched &&
+        customerForm.controls['Email'].errors?.email
+      "
+    >
+      Enter a valid email address
+    </span>
+  </div>
+
+  <div class="form-group mb-2">
+    <input
+      type="number"
+      class="form-control"
+      formControlName="BankAccountNumber"
+      placeholder="BankAccountNumber"
+    />
+    <span
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['BankAccountNumber'].touched &&
+        customerForm.controls['BankAccountNumber'].errors?.required
+      "
+    >
+      BankAccountNumber is required
+    </span>
+
+    <span
+      class="text-danger"
+      *ngIf="
+        customerForm.controls['BankAccountNumber'].touched &&
+        !customerForm.controls['BankAccountNumber'].errors?.required &&
+        customerForm.controls['BankAccountNumber'].errors
+          ?.validateBankAccountNumber
+      "
+    >
+      Please enter a valid BankAccountNumber
+    </span>
+  </div>
+
+  <div class="form-group">
+    <div class="d-grid">
+      <button type="submit" class="btn btn-warning btn-block">
+        <i class="bi bi-pencil"></i>
+      </button>
+    </div>
+  </div>
+</form>
